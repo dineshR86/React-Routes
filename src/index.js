@@ -1,11 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import App from './components/app';
-import store from './store';
+import { createStore, applyMiddleware } from 'redux';
+import {BrowserRouter,Route} from 'react-router-dom';
+import  promise from 'redux-promise';
+import reducers from './reducers';
+import PostIndex from './components/post_index';
+
+const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
+  <Provider store={createStoreWithMiddleware(reducers)}>
+    <div>
+      <Route path="/" component={PostIndex} />
+      </div>
   </Provider>
   , document.querySelector('.container'));
