@@ -28,14 +28,15 @@ class PostNew extends Component {
 
     onSubmit(values){
         console.log(values);
-        this.props.createPost(values);
+        this.props.createPost(values,()=>{
+            this.props.history.push("/"); // we are passing a callback function to the action creator.
+        });
     }
 
     render() {
         // handlesubmit is property passed to the props of the component by the redux form. 
         // its similar to how the redux connect passed the state object to the props of the component
         const {handleSubmit}=this.props; // ES6 syntax, its same as --> handleSubmit=this.props.handleSubmit
-        debugger;
         return (
             <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <Field label="Title" name="title" component={this.renderField} />
