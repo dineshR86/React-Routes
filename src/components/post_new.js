@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
-import {CreatePost} from '../actions/index';
+import {createPost} from '../actions/index';
 
 // reduxForm is a helper for connecting the form to the reducer (state). 
 // Field is used for interacting with the ReduxForm
@@ -28,14 +28,14 @@ class PostNew extends Component {
 
     onSubmit(values){
         console.log(values);
-        this.props.CreatePost(values);
+        this.props.createPost(values);
     }
 
     render() {
         // handlesubmit is property passed to the props of the component by the redux form. 
         // its similar to how the redux connect passed the state object to the props of the component
         const {handleSubmit}=this.props; // ES6 syntax, its same as --> handleSubmit=this.props.handleSubmit
-
+        debugger;
         return (
             <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <Field label="Title" name="title" component={this.renderField} />
@@ -77,5 +77,5 @@ export default reduxForm({
     validate,
     form: 'PostNewForm'
 })(
-    connect(null,{CreatePost})(PostNew)
+    connect(null,{createPost})(PostNew)
 );

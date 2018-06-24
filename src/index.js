@@ -8,6 +8,7 @@ import reducers from './reducers';
 import PostIndex from './components/post_index';
 import PostNew from './components/post_new';
 
+
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
 ReactDOM.render(
