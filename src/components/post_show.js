@@ -1,6 +1,7 @@
 import React,{Componenet} from 'react';
 import {connect} from 'react-redux';
-import {fetchPost} from '../actions/index';
+import {Link} from 'react-router-dom';
+import {fetchPost,deletePost} from '../actions/index';
 
 class PostShow extends Componenet{
 
@@ -9,6 +10,13 @@ class PostShow extends Componenet{
         // here we have only id parameter as wild card 
         const {id}=this.props.match.params; // this same as const id= this.props.match.params.id
         this.props.fetchPost(id);
+    }
+
+    onDeleteClick(){
+        const {id}=this.props.match.params;
+        this.props.deletePost(id,()=>{
+            this.props.history.push("/");
+        });
     }
 
     render (){
@@ -20,6 +28,10 @@ class PostShow extends Componenet{
 
         return (
             <div>
+                <Link to="/">Back to Posts</Link>
+                <button className="btn btn-danger pull-xs-right" onClick={this.onDeleteClick.bind(this)}>
+                Delete a Post
+                </button>
                 <h3>{post.title}</h3>
                 <h6>Categories:{post.categories}</h6>
                 <p>
@@ -36,4 +48,4 @@ function mapStateToProps({posts},ownProps){
     return {post:posts[ownProps.match.params.id]};
 }
 
-export default connect(mapStateToProps,{fetchPost})(PostShow);
+export default connect(mapStateToProps,{fetchPost,deletePost})(PostShow);
