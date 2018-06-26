@@ -1,9 +1,9 @@
-import React,{Componenet} from 'react';
+import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {fetchPost,deletePost} from '../actions/index';
 
-class PostShow extends Componenet{
+class PostShow extends Component{
 
     componentDidMount(){
         //we need to get the id passed to the url, we can get all the wild card values from the params object probvided by react router
